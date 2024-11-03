@@ -8,4 +8,4 @@ const connectDB = async() =>{
     await mongoose.connect(`${process.env.MONGODB_URI}/Spotify_final`)
 }
 
-export default connectDb;
+export default connectDB;

@@ -6,31 +6,30 @@ const addSong = async(req,res) =>{
         const name = req.body.name;
         const desc = req.body.desc;
         const album= req.body.album;
+        const audioFile = req.files.audio[0]; 
+        const imageFile = req.files.image[0];  
+        const audioUpload = await cloudinary.uploader.upload(audioFile.path, {resource_type:"video"});
+        const imageUpload = await cloudinary.uploader.upload(imageFile.path, {resource_type:"image"});
+        const duration = `${Math.floor(audioUpload.duration/60)}:${Math.floor(audioUpload.duration%60)}`
 
         if (!name || !desc || !album || !req.files.audio || !req.files.image) {
             return res.status(400).json({ success: false, message: 'Missing required fields' });
         }
 
-        const audioFile = req.files.audio[0];
-        const imageFile = req.files.image[0];
-        const audioUpload = await cloudinary.uploader.upload(audioFile.path, {resource_type:"video"});
-        const imageUpload = await cloudinary.uploader.upload(imageFile.path, {resource_type:"image"});
-        const duration = `${Math.floor(audioUpload.duration/60)}:${Math.floor(audioUpload.duration%60)}`
-
-        console.log(name, desc, album, audioUpload, imageUpload)
+        console.log(name, desc, album, audioUpload, imageUpload);
 
         const songData = {
             name,
             desc,
             album,
             image: imageUpload.secure_url,
-            file: audioUpload.secure_url,
+            audio: audioUpload.secure_url,
             duration
         }
-        const song= songModel(songData);
+        const song = songModel(songData);
         await song.save();
 
-        res.json({success:true, message:"Song Added"});
+        res.json({success:true, message:"Song Added Successfuly"});
 
     }catch(error){
         res.status(500).json({success:false, message: 'An error occurred', error: error.message});

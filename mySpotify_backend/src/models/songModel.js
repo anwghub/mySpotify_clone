@@ -6,7 +6,7 @@ const songSchema = new mongoose.Schema({
     desc: { type: String, required: true},
     album: { type: String, required: true},
     image: { type: String, required: true},
-    file: { type: String, required: true},
+    audio: { type: String, required: true},
     duration: { type: String, required: true},
 });
 

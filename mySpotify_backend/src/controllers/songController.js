@@ -45,7 +45,16 @@ const listSong = async(req,res) =>{
         console.error('Error listing songs:', error);
         res.status(500).json({ success: false, message: 'An error occurred', error: error.message });
     }
-
 }
 
-export {addSong, listSong};
+const removeSong = async(req,res)=>{
+    try{
+        await songModel.findByIdAndDelete(req.body.id);
+        res.json({success:true, message:"Song removed"});
+
+    }catch(error){
+        res.json({success: false});
+    }
+}
+
+export {addSong, listSong, removeSong};

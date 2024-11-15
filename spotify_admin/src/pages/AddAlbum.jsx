@@ -59,18 +59,18 @@ const AddAlbum = () => {
 
       <div className='flex flex-col gap-2.5'>
           <p>Album name</p>
-          <input onChange={()=>setName(e.target.value)} value={name}className='bg-transparent outline-green-600 border-2 boredr-gray-400 p-2.5 w-[max(40vw,250px)]' type="text" placeholder='Type here'/>
+          <input onChange={(e)=>setName(e.target.value)} value={name} className='bg-transparent outline-green-600 border-2 border-gray-400 p-2.5 w-[max(40vw,250px)]' placeholder='Type here' type="text" required/>
       </div>
 
       <div className='flex flex-col gap-2.5'>
           <p>Album description</p>
-          <input onChange={()=>setDesc(e.target.value)} value={desc}
-          className='bg-transparent outline-green-600 border-2 boredr-gray-400 p-2.5 w-[max(40vw,250px)]' type="text" placeholder='Type here'/>
+          <input onChange={(e)=>setDesc(e.target.value)} value={desc}
+          className='bg-transparent outline-green-600 border-2 border-gray-400 p-2.5 w-[max(40vw,250px)]' placeholder='Type here' type="text" required/>
       </div>
 
       <div className='flex flex-col gap-3'>
           <p>Background Colour</p>
-          <input onChange={()=>setColour(e.target.value)} value={colour} type="color"/>
+          <input onChange={(e)=>setColour(e.target.value)} value={colour} type="color"/>
       </div>
 
       <button className='text-base bg-black text-white py-2.5 px-14 cursor-pointer' type='submit'>ADD</button>

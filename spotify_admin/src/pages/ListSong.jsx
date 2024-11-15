@@ -8,7 +8,7 @@ const ListSong = () => {
       try{
         const response = await axios.get(`${url}/api/song/list`);
         if(response.data.success){
-          setData(response.data.data)
+          setData(response.data.data);
         }
 
       }catch(error){
@@ -47,12 +47,12 @@ const ListSong = () => {
         </div>
         {data.map((item, index)=>{
           return(
-            <div key={index} className='grid grid-cols-[1fr_fr_fr'>
+            <div key={index} className='grid grid-cols-[0.5fr_1fr_2fr_1fr_0.5fr] items-center gap-2.5 p-3 border border-gray-300 text-sm mr-5'>
               <img className='w-12' src={item.image} alt="" />
               <p>{item.name}</p>
               <p>{item.album}</p>
               <p>{item.duration}</p>
-              <p onClick={()=>removeSong(item.id)}>x</p>
+              <p onClick={()=>removeSong(item._id)}>x</p>
              </div>
           )
         })}

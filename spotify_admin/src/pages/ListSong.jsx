@@ -6,13 +6,13 @@ const ListSong = () => {
 
   const fetchSongs = async () => {
       try{
-        const response = await axios.post(`${url}/api/song/list`);
+        const response = await axios.get(`${url}/api/song/list`);
         if(response.data.success){
-          setData(response.data.songs)
+          setData(response.data.data)
         }
 
       }catch(error){
-        toast.error("Error occured...", error);
+        toast.error("Error occured...");
       }
   }
 

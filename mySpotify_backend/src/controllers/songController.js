@@ -38,7 +38,10 @@ const addSong = async(req,res) =>{
 
 const listSong = async(req,res) =>{
     try {
-        const allSongs = await songModel.find(); // Adjust query as needed
+        const allSongs = await songModel.find(); 
+        if (!allSongs || allSongs.length === 0) {
+            return res.status(404).json({ success: false, message: 'No songs found.' });
+        }
         res.json({ success: true, data: allSongs });
     } catch (error) {
         console.error('Error listing songs:', error);
@@ -47,12 +50,24 @@ const listSong = async(req,res) =>{
 }
 
 const removeSong = async(req,res)=>{
-    try{
-        await songModel.findByIdAndDelete(req.body.id);
-        res.json({success:true, message:"Song removed"});
+    try {
+        const { id } = req.body;
+        
+        if (!id) {
+            return res.status(400).json({ success: false, message: "Song ID is required" });
+        }
 
-    }catch(error){
-        res.json({success: false});
+        const deletedSong = await songModel.findByIdAndDelete(id);
+
+        if (!deletedSong) {
+            return res.status(404).json({ success: false, message: "Song not found" });
+        }
+
+        res.status(200).json({ success: true, message: "Song removed" });
+        
+    } catch (error) {
+        console.error("Error removing song:", error);
+        res.status(500).json({ success: false, message: "Internal server error" });
     }
 }
 

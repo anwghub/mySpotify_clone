@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { toast } from 'react-toastify';
+import axios from 'axios';
 
 const ListSong = () => {
   const [data, setData] = useState([]);
@@ -9,10 +10,12 @@ const ListSong = () => {
         const response = await axios.get(`${url}/api/song/list`);
         if(response.data.success){
           setData(response.data.data);
+        } else {
+          toast.error("No songs found.");
         }
 
       }catch(error){
-        toast.error("Error occured...");
+        toast.error("Error occured...",error);
       }
   }
 
@@ -31,7 +34,7 @@ const ListSong = () => {
 
   useEffect(() => {
     fetchSongs();
-  }, [])
+  }, []);
 
   return (
     <div>
@@ -52,7 +55,7 @@ const ListSong = () => {
               <p>{item.name}</p>
               <p>{item.album}</p>
               <p>{item.duration}</p>
-              <p onClick={()=>removeSong(item._id)}>x</p>
+              <p onClick={()=>removeSong(item._id)} className="cursor-pointer">x</p>
              </div>
           )
         })}

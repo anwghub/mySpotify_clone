@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
+import axios from 'axios';
+
 
 const ListAlbum = () => {
 
@@ -19,7 +21,7 @@ const ListAlbum = () => {
 
   const removeAlbum = async (id) => {
     try {
-      const response = await axios.post(`${url}/api/album/remove`, { id });
+      const response = await axios.post(`${url}/api/album/remove`, {id});
       if (response.data.success) {
         toast.success(response.data.message);
         await fetchAlbums();
@@ -33,7 +35,7 @@ const ListAlbum = () => {
 
   useEffect(() => {
     fetchAlbums();
-  }, [])
+  }, []);
 
   return (
     <div>

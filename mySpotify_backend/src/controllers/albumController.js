@@ -47,7 +47,7 @@ const removeAlbum = async(req,res) =>{
 
         const deletedAlbum = await albumModel.findByIdAndDelete(id);
 
-        if (!albumSong) {
+        if (!deletedAlbum) {
             return res.status(404).json({ success: false, message: "Album not found" });
         }
 

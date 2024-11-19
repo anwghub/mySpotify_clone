@@ -49,10 +49,9 @@ const AddSong = () => {
   const loadAlbumData = async()=>{
 
     try{
-      const response = await axios.post(`${url}/api/album/list`,formData);
+      const response = await axios.get(`${url}/api/album/list`);
       if (response.data.success) {
-        setAlbumData(response.data.albums);
-        
+        setAlbumData(response.data.albums);        
       }
       else {
         toast.error("Unable to load album data...");

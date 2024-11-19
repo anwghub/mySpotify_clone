@@ -10,7 +10,7 @@ const ListSong = () => {
       try{
         const response = await axios.get(`${url}/api/song/list`);
         if(response.data.success){
-          setData(response.data.data);
+          setData(response.data.songs);
         } else {
           toast.error("No songs found.");
         }

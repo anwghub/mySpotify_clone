@@ -42,7 +42,7 @@ const listSong = async(req,res) =>{
         if (!allSongs || allSongs.length === 0) {
             return res.status(404).json({ success: false, message: 'No songs found.' });
         }
-        res.json({ success: true, data: allSongs });
+        res.json({ success: true, songs: allSongs });
     } catch (error) {
         console.error('Error listing songs:', error);
         res.status(500).json({ success: false, message: 'An error occurred', error: error.message });

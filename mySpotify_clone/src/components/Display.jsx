@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useRef } from 'react'
 import { Route, Routes, useLocation } from 'react-router-dom'
 import DisplayHome from './DisplayHome'
 import DisplayAlbum from './DisplayAlbum'
-//import { albumsData } from '../assets/assets'
 import { PlayerContext } from '../context/PlayerContext'
 
 const Display = () => {
@@ -13,7 +12,7 @@ const Display = () => {
   const location = useLocation();
   const isAlbum = location.pathname.includes("album")
   const albumId = isAlbum ? location.pathname.split('/').pop() : "";
-  const bgColor = isAlbum && albumsData.length > 0 ? albumsData.find((x) => (x._id == albumId)).bgColor : "#121212";
+  const bgColor = isAlbum && albumsData.length > 0 ? albumsData.find((x) => (x._id == albumId)).bgColour : "#121212";
 
   useEffect(() => {
     if (isAlbum) {
